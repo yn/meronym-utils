@@ -2,6 +2,8 @@
 
 Meronym Utils
 
+Also check out github.com/yn/maven-repository, and soft-link it here: cd meronym-utils; ln -s /path/to/maven-repository maven-repository
+
 ## Usage
 
 Require. Import. Use.
