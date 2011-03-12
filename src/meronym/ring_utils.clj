@@ -10,15 +10,12 @@
            org.apache.commons.io.IOUtils
            org.joda.time.DateTime))
 
-(defprotocol DeploymentEnvironment
-  (production? [x]))
-
-(defn wrap-deployment-environment [app de]
+(defn wrap-deployment-environment [app production?]
   (fn [req]
-    (app (with-meta req (assoc (meta req) :de de)))))
+    (app (with-meta req (assoc (meta req) :production? production?)))))
 
 (defn production-deployment? [req]
-  (-> (meta req) :de (production?)))
+  (-> (meta req) :production?))
 
 (defn response
   "This is a helper function for constructing Ring responses. It returns a Ring
