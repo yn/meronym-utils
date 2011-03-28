@@ -37,25 +37,23 @@ http://groups.google.com/group/clojure/browse_frm/thread/da1285c538f22bb5"}
   meronym.condition
   (:require meronym.condition.Condition)
   (:import meronym.condition.Condition
-           clojure.lang.IPersistentMap)
-  (:use (clojure.contrib
-         [def :only (defvar)]
-         [seq :only (separate)])))
+           clojure.lang.IPersistentMap))
 
-(defvar *condition*
-  "While a handler is running, bound to the condition being handled")
 
-(defvar *selector*
-  "While a handler is running, bound to the selector returned by the
-  handler-case dispatch-fn for *condition*")
+(defn separate
+  "Returns a vector:
+   [ (filter f s), (filter (complement f) s) ]"
+  [f s]
+  [(filter f s) (filter (complement f) s)])
 
-(defvar *condition-object*
-  "While a handler is running, bound to the Condition object whose metadata
-  is the condition")
 
-(defvar *full-stack-traces* false
-  "Bind to true to include clojure.{core,lang,main} frames in stack
-  traces")
+(def *condition*)
+
+(def *selector*)
+
+(def *condition-object*)
+
+(def *full-stack-traces* false)
 
 (defmacro raise
   "Raises a condition. With no arguments, re-raises the current condition.
